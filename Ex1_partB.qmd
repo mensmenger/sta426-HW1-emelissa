@@ -1,0 +1,63 @@
+---
+title: "STA426-HW1-PartB"
+format: html
+editor: visual
+---
+
+## Toy example with Quarto
+
+In order to get familiarized with Quarto, we create a Quarto file where some data is sampled and subsequently plotted.
+
+### Data sampling
+
+The task is to sample 100 values from a negative binomial distribution which is parametrized with a given mean and variance.
+
+The function *rnbinom()* takes mean *mu* and *size* as input. To convert the given variance into *size* a quick calculation is needed.
+
+$$
+var = \mu + \mu^2 /size\\
+$$
+$$
+\\
+var = \mu + \mu^2*dispersion \\
+$$
+$$
+\\
+\rightarrow size = 1/dispersion
+$$
+
+Now we can sample the data and store it.
+
+```{r}
+n <- 100
+mean <- 10
+size <- 1/2
+
+sim_data <- rnbinom(n = n, mu = mean, size = size)
+```
+
+### Data plotting
+
+For plotting the sampled data either directly or log-transformed in a histogram, we can use the R function *hist().*
+
+```{r}
+
+hist(sim_data, main = "Histogram with linear scale")
+
+
+```
+
+```{r}
+hist(log(sim_data+1), main = "Histogram with logarithmic scale")
+```
+
+### Reporting mean and variance of sample
+
+```{r}
+sample_mean <- mean(sim_data)
+sample_var <- var(sim_data)
+
+
+```
+
+Sample mean = `r sample_mean` and sample variance = `r sample_var`.
